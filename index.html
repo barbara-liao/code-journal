@@ -13,14 +13,49 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Proza+Libre:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
+  <header class="purple-background font-header">
+    <div class="container">
+      <p class="margin-zero header-padding header-font">Code Journal</p>
+    </div>
   </header>
   <main>
     <div data-view="entry-form">
       <form id="create-form">
-
+        <div class="container font-body">
+          <div class="row">
+            <h1 class="font-header header-padding margin-zero">New Entry</h1>
+          </div>
+          <div class="row">
+            <div class="column-half">
+              <img src="images/placeholder-image-square.jpg" alt="Placeholder Image">
+            </div>
+          <div class="row"></div>
+            <div class="column-half bold">
+              <div class="row flex-direction-column font-bold">
+                <label for="title">Title</label>
+                <input class="padding" name="title" type="text" id="title-input">
+              </div>
+              <div class="row flex-direction-column font-bold">
+                <label for="photo-url">Photo URL</label>
+                <input class="padding" name="photo-url" type="text" id="photo-input">
+              </div>
+            </div>
+          </div>
+          <div class="row bold">
+            <div class="column-full display-flex flex-direction-column font-bold">
+              <label for="notes">Notes</label>
+              <textarea class="note-height font-body padding" name="notes" type="text" id="notes-input"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <button class="purple-background font-body button" type="submit">SAVE</button>
+          </div>
+        </div>
       </form>
     </div>
   </main>
