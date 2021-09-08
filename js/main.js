@@ -19,9 +19,6 @@ function handleSubmit(event) {
     imageURL: $entryForm.elements.photourl.value,
     notes: $entryForm.elements.notes.value
   };
-  // for (var i in newObj) {
-  //   newEntry[i] = newObj[i];
-  // }
   newObj.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(newObj);
