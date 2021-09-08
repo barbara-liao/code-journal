@@ -36,6 +36,18 @@ body {
   display: flex;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
 .font-header {
   font-family: 'Proza Libre', sans-serif;
 }
@@ -61,8 +73,17 @@ img {
   margin: 0;
 }
 
+.margin-bottom {
+  margin: 0 0 1.5rem 0;
+}
+
 .header-font {
   font-size: 1.3rem;
+}
+
+.header-padding {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
 }
 
 .button {
@@ -94,9 +115,8 @@ textarea {
   padding: 0.5rem;
 }
 
-.header-padding {
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
+.padding-zero {
+  padding: 0;
 }
 
 .row-reverse {
@@ -134,4 +154,9 @@ textarea:focus {
   .header-padding {
     padding: 0.8rem 0;
   }
+}
+
+.link {
+  margin-left: 1rem;
+  text-decoration: none;
 }
