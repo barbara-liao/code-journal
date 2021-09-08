@@ -26,3 +26,41 @@ function handleSubmit(event) {
   $image.src = 'images/placeholder-image-square.jpg';
   $entryForm.reset();
 }
+
+function renderEntry(event) {
+  var $initialRow = document.createElement('div');
+  $initialRow.className = 'row';
+
+  var $imageColumn = document.createElement('div');
+  $initialRow.appendChild($imageColumn);
+  $imageColumn.setAttribute('class', 'column-half');
+
+  var $entryImage = document.createElement('img');
+  $imageColumn.appendChild($entryImage);
+  $entryImage.setAttribute('src', data.entries[0].imageURL);
+
+  var $textColumn = document.createElement('div');
+  $initialRow.appendChild($textColumn);
+  $textColumn.setAttribute('class', 'column-half');
+
+  var $rowTitle = document.createElement('div');
+  $textColumn.appendChild($rowTitle);
+  $rowTitle.setAttribute('class', 'row');
+
+  var $title = document.createElement('h2');
+  var $titleText = document.createTextNode(data.entries[0].title);
+  $title.appendChild($titleText);
+  $rowTitle.appendChild($title);
+
+  var $rowText = document.createElement('div');
+  $textColumn.appendChild($rowText);
+  $rowText.setAttribute('class', 'row');
+
+  var $notes = document.createElement('p');
+  var $notesText = document.createTextNode(data.entries[0].notes);
+  $notes.appendChild($notesText);
+  $rowText.appendChild($notes);
+  $notes.setAttribute('class', 'margin-bottom');
+
+  return $initialRow;
+}
