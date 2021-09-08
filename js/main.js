@@ -7,6 +7,14 @@ var $entryForm = document.querySelector('#create-form');
 
 $photoInput.addEventListener('input', handleInput);
 $entryForm.addEventListener('submit', handleSubmit);
+window.addEventListener('DOMContentLoaded', renderEntry);
+
+var $ul = document.querySelector('ul');
+
+for (var i = 0; i < data.entries.length; i++) {
+  var render = renderEntry(data.entries[i]);
+  $ul.appendChild(render);
+}
 
 function handleInput(event) {
   $image.src = event.target.value;
@@ -37,7 +45,7 @@ function renderEntry(event) {
 
   var $entryImage = document.createElement('img');
   $imageColumn.appendChild($entryImage);
-  $entryImage.setAttribute('src', data.entries[0].imageURL);
+  $entryImage.setAttribute('src', data.entries[i].imageURL);
 
   var $textColumn = document.createElement('div');
   $initialRow.appendChild($textColumn);
@@ -48,7 +56,7 @@ function renderEntry(event) {
   $rowTitle.setAttribute('class', 'row');
 
   var $title = document.createElement('h2');
-  var $titleText = document.createTextNode(data.entries[0].title);
+  var $titleText = document.createTextNode(data.entries[i].title);
   $title.appendChild($titleText);
   $rowTitle.appendChild($title);
 
@@ -57,7 +65,7 @@ function renderEntry(event) {
   $rowText.setAttribute('class', 'row');
 
   var $notes = document.createElement('p');
-  var $notesText = document.createTextNode(data.entries[0].notes);
+  var $notesText = document.createTextNode(data.entries[i].notes);
   $notes.appendChild($notesText);
   $rowText.appendChild($notes);
   $notes.setAttribute('class', 'margin-bottom');
