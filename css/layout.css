@@ -131,6 +131,8 @@ textarea {
 .header-padding {
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
+}
 
-  /* padding-left: 0.75rem; */
+.row-reverse {
+  flex-direction: row-reverse;
 }
