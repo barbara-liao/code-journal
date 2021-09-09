@@ -16,6 +16,8 @@ $entriesLink.addEventListener('click', viewSwap);
 $newLink.addEventListener('click', viewSwap);
 $entriesLink.addEventListener('click', dataView);
 $newLink.addEventListener('click', dataView);
+$entriesLink.addEventListener('click', noEntry);
+$newLink.addEventListener('click', noEntry);
 
 var $ul = document.querySelector('ul');
 
@@ -36,6 +38,14 @@ function handleInput(event) {
   $image.src = event.target.value;
 }
 
+function noEntry(event) {
+  if (data.view === 'entry-form') {
+    $noEntry.className = 'hidden';
+  } else if (data.entries.length === 0 && data.view === 'entries') {
+    $noEntry.className = '';
+  }
+}
+
 function handleSubmit(event) {
   event.preventDefault();
   var newObj = {
@@ -47,7 +57,7 @@ function handleSubmit(event) {
   data.nextEntryId++;
   data.entries.unshift(newObj);
   $ul.prepend(renderEntry(newObj));
-  viewSwap('entry-form');
+  viewSwap('entries');
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
 }
