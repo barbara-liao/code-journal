@@ -20,13 +20,14 @@
 <body>
   <header class="purple-background font-header">
     <div class="container">
-      <div class="column-full">
+      <div class="column-full display-flex">
         <p class="margin-zero header-padding header-font">Code Journal</p>
+        <a href="#" id="entries-link" data-view="entries" class="purple-background display-flex align-center link" >Entries</a>
       </div>
     </div>
   </header>
   <main>
-    <div data-view="entry-form">
+    <div class="view hidden" data-view="entry-form">
       <form id="create-form">
         <div class="container font-body">
           <div class="row">
@@ -57,11 +58,28 @@
           </div>
           <div class="row">
             <div class="column-full display-flex row-reverse">
-              <button class="purple-background font-body button" type="submit">SAVE</button>
+              <button class="purple-background font-body button" data-view="entry-form" type="submit">SAVE</button>
             </div>
           </div>
         </div>
       </form>
+    </div>
+    <div class="view" data-view="entries">
+      <div class="container font-body">
+        <div class="row">
+          <div class="column-full display-flex justify-between">
+            <h1 class="font-header header-padding margin-zero">Entries</h1>
+            <a href="#" id="new-link" data-view="entry-form" class="display-flex align-center purple-background font-body button justify-center margin-auto link">NEW</a>
+          </div>
+        </div>
+        <ul class="padding-zero">
+          <div class="" id="no-entry" data-view="no-entries">
+            <div class="column-full display-flex justify-center align-center">
+              <p>No entries have been recorded.</p>
+            </div>
+          </div>
+        </ul>
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>
