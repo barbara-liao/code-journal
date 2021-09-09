@@ -6,10 +6,11 @@ var $image = document.querySelector('img');
 var $createForm = document.querySelector('#create-form');
 var $viewForm = document.querySelector('#view-form');
 var $viewEntry = document.querySelector('#view-entry');
-var $input = document.querySelectorAll('input');
-var $a = document.querySelector('a');
+// var $input = document.querySelectorAll('input');
+// var $a = document.querySelector('a');
 var $entriesLink = document.querySelector('#entries-link');
 var $newLink = document.querySelector('#new-link');
+var $noEntry = document.querySelector('#no-entry');
 
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
@@ -18,6 +19,12 @@ $entriesLink.addEventListener('click', viewEntries);
 $newLink.addEventListener('click', viewForm);
 
 var $ul = document.querySelector('ul');
+
+if (data.entries.length === 0) {
+  $noEntry.className = '';
+} else {
+  $noEntry.className = 'hidden';
+}
 
 function handleLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
@@ -40,9 +47,15 @@ function handleSubmit(event) {
   newObj.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(newObj);
-  renderEntry(newObj);
+  $ul.prepend(renderEntry(newObj));
+  viewEntries();
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
+  if (data.entries.length === 0) {
+    $noEntry.className = '';
+  } else {
+    $noEntry.className = 'hidden';
+  }
 }
 
 function renderEntry(entry) {
@@ -90,4 +103,5 @@ function viewEntries(event) {
 function viewForm(event) {
   $viewEntry.className = 'hidden';
   $viewForm.className = '';
+
 }
