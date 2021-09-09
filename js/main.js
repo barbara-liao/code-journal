@@ -23,6 +23,7 @@ function handleLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var render = renderEntry(data.entries[i]);
     $ul.appendChild(render);
+    viewSwap(data.view);
     if (data.entries.length === 0) {
       $noEntry.className = '';
     } else {
@@ -92,9 +93,11 @@ function viewSwap(string) {
 
   for (var i = 0; i < $view.length; i++) {
     if ($view[i].dataset.view === string) {
-      $view[i].className = 'view hidden';
-    } else {
       $view[i].className = 'view';
+      var currentView = $view[i].dataset.view;
+      data.view = currentView;
+    } else {
+      $view[i].className = 'view hidden';
     }
   }
 }
