@@ -26,11 +26,11 @@ function handleLoad(event) {
     var render = renderEntry(data.entries[i]);
     $ul.appendChild(render);
     viewSwap(data.view);
-    if (data.entries.length === 0) {
-      $noEntry.className = '';
-    } else {
-      $noEntry.className = 'hidden';
-    }
+  }
+  if (data.entries.length === 0) {
+    $noEntry.className = '';
+  } else {
+    $noEntry.className = 'hidden';
   }
 }
 
