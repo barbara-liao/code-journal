@@ -22,12 +22,12 @@
     <div class="container">
       <div class="column-full display-flex">
         <p class="margin-zero header-padding header-font">Code Journal</p>
-        <a href="#" class="purple-background display-flex align-center link" >Entries</a>
+        <a href="#" id="entries-link" class="purple-background display-flex align-center link" >Entries</a>
       </div>
     </div>
   </header>
   <main>
-    <div data-view="entry-form">
+    <div class="hidden" id="view-form" data-view="entry-form">
       <form id="create-form">
         <div class="container font-body">
           <div class="row">
@@ -64,12 +64,12 @@
         </div>
       </form>
     </div>
-    <div data-view="entries">
+    <div class="" id="view-entry" data-view="entries">
       <div class="container font-body">
         <div class="row">
           <div class="column-full display-flex justify-between">
             <h1 class="font-header header-padding margin-zero">Entries</h1>
-            <a href="#" class="display-flex align-center purple-background font-body button justify-center margin-auto link">NEW</a>
+            <a href="#" id="new-link" class="display-flex align-center purple-background font-body button justify-center margin-auto link">NEW</a>
           </div>
         </div>
         <ul class="padding-zero">

@@ -3,17 +3,27 @@
 
 var $photoInput = document.getElementById('photo-input');
 var $image = document.querySelector('img');
-var $entryForm = document.querySelector('#create-form');
+var $createForm = document.querySelector('#create-form');
+var $viewForm = document.querySelector('#view-form');
+var $viewEntry = document.querySelector('#view-entry');
+var $input = document.querySelectorAll('input');
+var $a = document.querySelector('a');
+var $entriesLink = document.querySelector('#entries-link');
+var $newLink = document.querySelector('#new-link');
 
 $photoInput.addEventListener('input', handleInput);
-$entryForm.addEventListener('submit', handleSubmit);
-window.addEventListener('DOMContentLoaded', renderEntry);
+$createForm.addEventListener('submit', handleSubmit);
+window.addEventListener('DOMContentLoaded', handleLoad);
+$entriesLink.addEventListener('click', viewEntries);
+$newLink.addEventListener('click', viewForm);
 
 var $ul = document.querySelector('ul');
 
-for (var i = 0; i < data.entries.length; i++) {
-  var render = renderEntry(data.entries[i]);
-  $ul.appendChild(render);
+function handleLoad(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var render = renderEntry(data.entries[i]);
+    $ul.appendChild(render);
+  }
 }
 
 function handleInput(event) {
@@ -23,19 +33,19 @@ function handleInput(event) {
 function handleSubmit(event) {
   event.preventDefault();
   var newObj = {
-    title: $entryForm.elements.title.value,
-    imageURL: $entryForm.elements.photourl.value,
-    notes: $entryForm.elements.notes.value
+    title: $createForm.elements.title.value,
+    imageURL: $createForm.elements.photourl.value,
+    notes: $createForm.elements.notes.value
   };
   newObj.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(newObj);
-
+  renderEntry(newObj);
   $image.src = 'images/placeholder-image-square.jpg';
-  $entryForm.reset();
+  $createForm.reset();
 }
 
-function renderEntry(event) {
+function renderEntry(entry) {
   var $initialRow = document.createElement('div');
   $initialRow.className = 'row';
 
@@ -45,7 +55,7 @@ function renderEntry(event) {
 
   var $entryImage = document.createElement('img');
   $imageColumn.appendChild($entryImage);
-  $entryImage.setAttribute('src', data.entries[i].imageURL);
+  $entryImage.setAttribute('src', entry.imageURL);
 
   var $textColumn = document.createElement('div');
   $initialRow.appendChild($textColumn);
@@ -56,7 +66,7 @@ function renderEntry(event) {
   $rowTitle.setAttribute('class', 'row');
 
   var $title = document.createElement('h2');
-  var $titleText = document.createTextNode(data.entries[i].title);
+  var $titleText = document.createTextNode(entry.title);
   $title.appendChild($titleText);
   $rowTitle.appendChild($title);
 
@@ -65,10 +75,19 @@ function renderEntry(event) {
   $rowText.setAttribute('class', 'row');
 
   var $notes = document.createElement('p');
-  var $notesText = document.createTextNode(data.entries[i].notes);
+  var $notesText = document.createTextNode(entry.notes);
   $notes.appendChild($notesText);
   $rowText.appendChild($notes);
   $notes.setAttribute('class', 'margin-bottom');
-
   return $initialRow;
+}
+
+function viewEntries(event) {
+  $viewEntry.className = '';
+  $viewForm.className = 'hidden';
+}
+
+function viewForm(event) {
+  $viewEntry.className = 'hidden';
+  $viewForm.className = '';
 }
