@@ -4,10 +4,7 @@
 var $photoInput = document.getElementById('photo-input');
 var $image = document.querySelector('img');
 var $createForm = document.querySelector('#create-form');
-var $viewForm = document.querySelector('#view-form');
-var $viewEntry = document.querySelector('#view-entry');
-// var $input = document.querySelectorAll('input');
-// var $a = document.querySelector('a');
+var $view = document.querySelectorAll('.view');
 var $entriesLink = document.querySelector('#entries-link');
 var $newLink = document.querySelector('#new-link');
 var $noEntry = document.querySelector('#no-entry');
@@ -15,21 +12,22 @@ var $noEntry = document.querySelector('#no-entry');
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
 window.addEventListener('DOMContentLoaded', handleLoad);
-$entriesLink.addEventListener('click', viewEntries);
-$newLink.addEventListener('click', viewForm);
+$entriesLink.addEventListener('click', viewSwap);
+$newLink.addEventListener('click', viewSwap);
+$entriesLink.addEventListener('click', dataView);
+$newLink.addEventListener('click', dataView);
 
 var $ul = document.querySelector('ul');
-
-if (data.entries.length === 0) {
-  $noEntry.className = '';
-} else {
-  $noEntry.className = 'hidden';
-}
 
 function handleLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var render = renderEntry(data.entries[i]);
     $ul.appendChild(render);
+    if (data.entries.length === 0) {
+      $noEntry.className = '';
+    } else {
+      $noEntry.className = 'hidden';
+    }
   }
 }
 
@@ -48,14 +46,9 @@ function handleSubmit(event) {
   data.nextEntryId++;
   data.entries.unshift(newObj);
   $ul.prepend(renderEntry(newObj));
-  viewEntries();
+  viewSwap('entry-form');
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
-  if (data.entries.length === 0) {
-    $noEntry.className = '';
-  } else {
-    $noEntry.className = 'hidden';
-  }
 }
 
 function renderEntry(entry) {
@@ -95,13 +88,21 @@ function renderEntry(entry) {
   return $initialRow;
 }
 
-function viewEntries(event) {
-  $viewEntry.className = '';
-  $viewForm.className = 'hidden';
+function viewSwap(string) {
+
+  for (var i = 0; i < $view.length; i++) {
+    if ($view[i].dataset.view === string) {
+      $view[i].className = 'view hidden';
+    } else {
+      $view[i].className = 'view';
+    }
+  }
 }
 
-function viewForm(event) {
-  $viewEntry.className = 'hidden';
-  $viewForm.className = '';
+function dataView(event) {
+  var $dataView = event.target.getAttribute('data-view');
 
+  if (event.target.nodeName === 'A' && $dataView !== '') {
+    viewSwap($dataView);
+  }
 }
