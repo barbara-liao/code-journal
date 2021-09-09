@@ -12,12 +12,8 @@ var $noEntry = document.querySelector('#no-entry');
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
 window.addEventListener('DOMContentLoaded', handleLoad);
-$entriesLink.addEventListener('click', viewSwap);
-$newLink.addEventListener('click', viewSwap);
 $entriesLink.addEventListener('click', dataView);
 $newLink.addEventListener('click', dataView);
-$entriesLink.addEventListener('click', noEntry);
-$newLink.addEventListener('click', noEntry);
 
 var $ul = document.querySelector('ul');
 
@@ -36,14 +32,6 @@ function handleLoad(event) {
 
 function handleInput(event) {
   $image.src = event.target.value;
-}
-
-function noEntry(event) {
-  if (data.view === 'entry-form') {
-    $noEntry.className = 'hidden';
-  } else if (data.entries.length === 0 && data.view === 'entries') {
-    $noEntry.className = '';
-  }
 }
 
 function handleSubmit(event) {
@@ -109,6 +97,11 @@ function viewSwap(string) {
     } else {
       $view[i].className = 'view hidden';
     }
+  }
+  if (data.view === 'entry-form') {
+    $noEntry.className = 'hidden';
+  } else if (data.entries.length === 0 && data.view === 'entries') {
+    $noEntry.className = '';
   }
 }
 
