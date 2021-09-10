@@ -59,22 +59,6 @@ function handleInput(event) {
   $image.src = event.target.value;
 }
 
-/*
-- create template for updated object
-- look through each li in the html
-- if the data entry Id in the li element matches the one in the updated object
-- replace that li with the updated rendered entry
-*/
-
-/*
-- create template for updated object
-- look through each li in the html
-- if the data entry Id in the li element matches the one in the updated object
-- replace that li with the updated rendered entry
-- otherwise, if the data entry id doesn't exist,
-- create new object
-*/
-
 function handleSubmit(event) {
   event.preventDefault();
   var $liList = document.querySelectorAll('li');
@@ -88,6 +72,7 @@ function handleSubmit(event) {
     data.nextEntryId++;
     data.entries.unshift(newObj);
     $ul.prepend(renderEntry(newObj));
+    data.editing = null;
   } else {
     for (var i = 0; i < $liList.length; i++) {
       var updateObj = {
@@ -99,7 +84,7 @@ function handleSubmit(event) {
       $liList[i].replaceWith(renderEntry(updateObj));
     }
   }
-
+  // $headerText.textContent = 'New Entry';
   viewSwap('entries');
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
@@ -153,7 +138,6 @@ function renderEntry(entry) {
 }
 
 function viewSwap(string) {
-  // $headerText.textContent = 'New Entry';
 
   for (var i = 0; i < $view.length; i++) {
     if ($view[i].dataset.view === string) {
@@ -177,4 +161,8 @@ function dataView(event) {
   if (event.target.nodeName === 'A' && $dataView !== '') {
     viewSwap($dataView);
   }
+  $headerText.textContent = 'New Entry';
+  data.editing = null;
+  $image.src = 'images/placeholder-image-square.jpg';
+  $createForm.reset();
 }
