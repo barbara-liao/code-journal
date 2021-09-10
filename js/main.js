@@ -18,7 +18,11 @@ $newLink.addEventListener('click', dataView);
 $ul.addEventListener('click', editEntry);
 
 function editEntry(event) {
+  var $dataView = event.target.getAttribute('data-view');
 
+  if (event.target.nodeName === 'I' && $dataView !== '') {
+    viewSwap($dataView);
+  }
 }
 
 function handleLoad(event) {
@@ -82,6 +86,7 @@ function renderEntry(entry) {
   var $edit = document.createElement('i');
   $rowTitle.appendChild($edit);
   $edit.setAttribute('class', 'fas fa-pen edit-icon');
+  $edit.setAttribute('data-view', 'entry-form');
 
   var $rowText = document.createElement('div');
   $textColumn.appendChild($rowText);
