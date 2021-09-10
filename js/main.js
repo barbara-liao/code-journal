@@ -26,20 +26,20 @@ function editEntry(event) {
 
   if (event.target.nodeName === 'I' && $dataView !== '') {
     viewSwap($dataView);
-  }
 
-  var targetEntryId = event.target.getAttribute('data-entry-id');
-  for (var i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].entryId === parseInt(targetEntryId)) {
-      data.editing = data.entries[i];
-      var currentView = $view[i].dataset.view;
-      data.view = currentView;
+    var targetEntryId = event.target.getAttribute('data-entry-id');
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === parseInt(targetEntryId)) {
+        data.editing = data.entries[i];
+        var currentView = $view[i].dataset.view;
+        data.view = currentView;
+      }
     }
+    $titleInput.value = data.editing.title;
+    $photoInput.value = data.editing.imageURL;
+    $notesInput.value = data.editing.notes;
+    $image.src = data.editing.imageURL;
   }
-  $titleInput.value = data.editing.title;
-  $photoInput.value = data.editing.imageURL;
-  $notesInput.value = data.editing.notes;
-  $image.src = data.editing.imageURL;
 }
 
 function handleLoad(event) {
@@ -75,13 +75,15 @@ function handleSubmit(event) {
     data.editing = null;
   } else {
     for (var i = 0; i < $liList.length; i++) {
-      var updateObj = {
-        title: $createForm.elements.title.value,
-        imageURL: $createForm.elements.photourl.value,
-        notes: $createForm.elements.notes.value,
-        entryId: data.editing.entryId
-      };
-      $liList[i].replaceWith(renderEntry(updateObj));
+      if (parseInt($liList[i].getAttribute('data-entry-id')) === data.editing.entryId) {
+        var updateObj = {
+          title: $createForm.elements.title.value,
+          imageURL: $createForm.elements.photourl.value,
+          notes: $createForm.elements.notes.value,
+          entryId: data.editing.entryId
+        };
+        $liList[i].replaceWith(renderEntry(updateObj));
+      }
     }
   }
   viewSwap('entries');
