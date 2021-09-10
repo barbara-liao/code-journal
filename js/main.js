@@ -8,14 +8,18 @@ var $view = document.querySelectorAll('.view');
 var $entriesLink = document.querySelector('#entries-link');
 var $newLink = document.querySelector('#new-link');
 var $noEntry = document.querySelector('#no-entry');
+var $ul = document.querySelector('ul');
 
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
 window.addEventListener('DOMContentLoaded', handleLoad);
 $entriesLink.addEventListener('click', dataView);
 $newLink.addEventListener('click', dataView);
+$ul.addEventListener('click', editEntry);
 
-var $ul = document.querySelector('ul');
+function editEntry(event) {
+
+}
 
 function handleLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
