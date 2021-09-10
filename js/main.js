@@ -84,7 +84,6 @@ function handleSubmit(event) {
       $liList[i].replaceWith(renderEntry(updateObj));
     }
   }
-  // $headerText.textContent = 'New Entry';
   viewSwap('entries');
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
