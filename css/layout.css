@@ -160,3 +160,14 @@ textarea:focus {
   margin-left: 1rem;
   text-decoration: none;
 }
+
+.edit-icon {
+  color: rgb(119, 102, 136);
+  font-size: 1.5rem;
+  align-items: center;
+  display: flex;
+}
+
+i:hover {
+  color: rgb(76, 36, 117);
+}

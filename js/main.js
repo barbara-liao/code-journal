@@ -68,12 +68,16 @@ function renderEntry(entry) {
 
   var $rowTitle = document.createElement('div');
   $textColumn.appendChild($rowTitle);
-  $rowTitle.setAttribute('class', 'row');
+  $rowTitle.className = 'row justify-between';
 
   var $title = document.createElement('h2');
   var $titleText = document.createTextNode(entry.title);
   $title.appendChild($titleText);
   $rowTitle.appendChild($title);
+
+  var $edit = document.createElement('i');
+  $rowTitle.appendChild($edit);
+  $edit.setAttribute('class', 'fas fa-pen edit-icon');
 
   var $rowText = document.createElement('div');
   $textColumn.appendChild($rowText);
