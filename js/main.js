@@ -23,6 +23,8 @@ function editEntry(event) {
   if (event.target.nodeName === 'I' && $dataView !== '') {
     viewSwap($dataView);
   }
+
+  data.editing = event.target.getAttribute('data-entry-id');
 }
 
 function handleLoad(event) {
@@ -87,6 +89,7 @@ function renderEntry(entry) {
   $rowTitle.appendChild($edit);
   $edit.setAttribute('class', 'fas fa-pen edit-icon');
   $edit.setAttribute('data-view', 'entry-form');
+  $edit.setAttribute('data-entry-id', entry.entryId);
 
   var $rowText = document.createElement('div');
   $textColumn.appendChild($rowText);
