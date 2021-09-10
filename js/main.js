@@ -9,6 +9,9 @@ var $entriesLink = document.querySelector('#entries-link');
 var $newLink = document.querySelector('#new-link');
 var $noEntry = document.querySelector('#no-entry');
 var $ul = document.querySelector('ul');
+var $titleInput = document.getElementById('title-input');
+var $notesInput = document.getElementById('notes-input');
+var $headerText = document.getElementById('header-text');
 
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
@@ -19,49 +22,95 @@ $ul.addEventListener('click', editEntry);
 
 function editEntry(event) {
   var $dataView = event.target.getAttribute('data-view');
+  $headerText.textContent = 'Edit Entry';
 
   if (event.target.nodeName === 'I' && $dataView !== '') {
     viewSwap($dataView);
   }
 
-  data.editing = event.target.getAttribute('data-entry-id');
+  var targetEntryId = event.target.getAttribute('data-entry-id');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === parseInt(targetEntryId)) {
+      data.editing = data.entries[i];
+      var currentView = $view[i].dataset.view;
+      data.view = currentView;
+    }
+  }
+  $titleInput.value = data.editing.title;
+  $photoInput.value = data.editing.imageURL;
+  $notesInput.value = data.editing.notes;
+  $image.src = data.editing.imageURL;
 }
 
 function handleLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var render = renderEntry(data.entries[i]);
     $ul.appendChild(render);
-    viewSwap(data.view);
   }
   if (data.entries.length === 0) {
     $noEntry.className = '';
   } else {
     $noEntry.className = 'hidden';
   }
+  viewSwap(data.view);
 }
 
 function handleInput(event) {
   $image.src = event.target.value;
 }
 
+/*
+- create template for updated object
+- look through each li in the html
+- if the data entry Id in the li element matches the one in the updated object
+- replace that li with the updated rendered entry
+*/
+
+/*
+- create template for updated object
+- look through each li in the html
+- if the data entry Id in the li element matches the one in the updated object
+- replace that li with the updated rendered entry
+- otherwise, if the data entry id doesn't exist,
+- create new object
+*/
+
 function handleSubmit(event) {
   event.preventDefault();
-  var newObj = {
-    title: $createForm.elements.title.value,
-    imageURL: $createForm.elements.photourl.value,
-    notes: $createForm.elements.notes.value
-  };
-  newObj.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(newObj);
-  $ul.prepend(renderEntry(newObj));
+  var $liList = document.querySelectorAll('li');
+  if (data.editing === null) {
+    var newObj = {
+      title: $createForm.elements.title.value,
+      imageURL: $createForm.elements.photourl.value,
+      notes: $createForm.elements.notes.value
+    };
+    newObj.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(newObj);
+    $ul.prepend(renderEntry(newObj));
+  } else {
+    for (var i = 0; i < $liList.length; i++) {
+      var updateObj = {
+        title: $createForm.elements.title.value,
+        imageURL: $createForm.elements.photourl.value,
+        notes: $createForm.elements.notes.value,
+        entryId: data.editing.entryId
+      };
+      $liList[i].replaceWith(renderEntry(updateObj));
+    }
+  }
+
   viewSwap('entries');
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
 }
 
 function renderEntry(entry) {
+  var $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', entry.entryId);
+
   var $initialRow = document.createElement('div');
+  $li.appendChild($initialRow);
   $initialRow.className = 'row';
 
   var $imageColumn = document.createElement('div');
@@ -100,10 +149,11 @@ function renderEntry(entry) {
   $notes.appendChild($notesText);
   $rowText.appendChild($notes);
   $notes.setAttribute('class', 'margin-bottom');
-  return $initialRow;
+  return $li;
 }
 
 function viewSwap(string) {
+  // $headerText.textContent = 'New Entry';
 
   for (var i = 0; i < $view.length; i++) {
     if ($view[i].dataset.view === string) {

@@ -123,6 +123,26 @@ textarea {
   flex-direction: row-reverse;
 }
 
+.link {
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.edit-icon {
+  color: rgb(119, 102, 136);
+  font-size: 1.5rem;
+  align-items: center;
+  display: flex;
+}
+
+i:hover {
+  color: rgb(76, 36, 117);
+}
+
+li {
+  list-style-type: none;
+}
+
 input:focus,
 textarea:focus {
   outline: none;
@@ -154,20 +174,4 @@ textarea:focus {
   .header-padding {
     padding: 0.8rem 0;
   }
-}
-
-.link {
-  margin-left: 1rem;
-  text-decoration: none;
-}
-
-.edit-icon {
-  color: rgb(119, 102, 136);
-  font-size: 1.5rem;
-  align-items: center;
-  display: flex;
-}
-
-i:hover {
-  color: rgb(76, 36, 117);
 }
