@@ -12,6 +12,7 @@ var $ul = document.querySelector('ul');
 var $titleInput = document.getElementById('title-input');
 var $notesInput = document.getElementById('notes-input');
 var $headerText = document.getElementById('header-text');
+var $delete = document.getElementById('delete-entry');
 
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
@@ -40,6 +41,7 @@ function editEntry(event) {
     $notesInput.value = data.editing.notes;
     $image.src = data.editing.imageURL;
   }
+  $delete.className = 'delete-button';
 }
 
 function handleLoad(event) {
@@ -89,6 +91,7 @@ function handleSubmit(event) {
   viewSwap('entries');
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
+  $delete.className = 'delete-button invisible';
 }
 
 function renderEntry(entry) {
@@ -166,4 +169,5 @@ function dataView(event) {
   data.editing = null;
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
+  $delete.className = 'delete-button invisible';
 }
