@@ -25,33 +25,26 @@ $newLink.addEventListener('click', dataView);
 $ul.addEventListener('click', editEntry);
 $delete.addEventListener('click', handleDelete);
 $cancel.addEventListener('click', handleCancel);
-$confirm.addEventListener('click', handleConfirm);
+$confirm.addEventListener('click', handleConfirmDOM);
+$confirm.addEventListener('click', handleConfirmData);
 
-function handleConfirm(event) {
+function handleConfirmData(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      data.entries.splice(i, 1);
+    }
+  }
+}
+
+function handleConfirmDOM(event) {
   var $liList = document.querySelectorAll('li');
   for (var i = 0; i < $liList.length; i++) {
     if (parseInt($liList[i].getAttribute('data-entry-id')) === data.editing.entryId) {
       $liList[i].remove();
+      viewSwap('entries');
+      $modal.className = 'modal-overlay hidden';
     }
   }
-
-//   for (var i = 0; i < $liList.length; i++) {
-//     if (parseInt($liList[i].getAttribute('data-entry-id')) === data.editing.entryId) {
-//       var updateObj = {
-//         title: $createForm.elements.title.value,
-//         imageURL: $createForm.elements.photourl.value,
-//         notes: $createForm.elements.notes.value,
-//         entryId: data.editing.entryId
-//       };
-//       $liList[i].replaceWith(renderEntry(updateObj));
-//     }
-//   }
-// }
-// viewSwap('entries');
-// $image.src = 'images/placeholder-image-square.jpg';
-// $createForm.reset();
-// $delete.className = 'delete-button invisible';
-// }
 }
 
 function handleCancel(event) {

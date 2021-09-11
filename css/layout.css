@@ -130,6 +130,14 @@ img {
   padding: 0;
 }
 
+.delete-button:hover {
+  cursor: pointer;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 .cancel {
   background-color: rgb(218, 216, 217);
   border: none;
@@ -192,6 +200,7 @@ textarea {
 
 i:hover {
   color: rgb(76, 36, 117);
+  cursor: pointer;
 }
 
 li {
