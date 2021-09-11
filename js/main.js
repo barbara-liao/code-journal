@@ -13,6 +13,7 @@ var $titleInput = document.getElementById('title-input');
 var $notesInput = document.getElementById('notes-input');
 var $headerText = document.getElementById('header-text');
 var $delete = document.getElementById('delete-entry');
+var $modal = document.querySelector('.modal-overlay');
 
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
@@ -20,6 +21,14 @@ window.addEventListener('DOMContentLoaded', handleLoad);
 $entriesLink.addEventListener('click', dataView);
 $newLink.addEventListener('click', dataView);
 $ul.addEventListener('click', editEntry);
+$delete.addEventListener('click', handleDelete);
+
+function handleDelete(event) {
+
+  $modal.className = 'modal-overlay';
+  viewSwap('entry-form');
+
+}
 
 function editEntry(event) {
   var $dataView = event.target.getAttribute('data-view');
