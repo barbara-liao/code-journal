@@ -14,6 +14,8 @@ var $notesInput = document.getElementById('notes-input');
 var $headerText = document.getElementById('header-text');
 var $delete = document.getElementById('delete-entry');
 var $modal = document.querySelector('.modal-overlay');
+var $cancel = document.querySelector('.cancel');
+var $confirm = document.querySelector('.confirm');
 
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
@@ -22,12 +24,42 @@ $entriesLink.addEventListener('click', dataView);
 $newLink.addEventListener('click', dataView);
 $ul.addEventListener('click', editEntry);
 $delete.addEventListener('click', handleDelete);
+$cancel.addEventListener('click', handleCancel);
+$confirm.addEventListener('click', handleConfirm);
+
+function handleConfirm(event) {
+  var $liList = document.querySelectorAll('li');
+  for (var i = 0; i < $liList.length; i++) {
+    if (parseInt($liList[i].getAttribute('data-entry-id')) === data.editing.entryId) {
+      $liList[i].remove();
+    }
+  }
+
+//   for (var i = 0; i < $liList.length; i++) {
+//     if (parseInt($liList[i].getAttribute('data-entry-id')) === data.editing.entryId) {
+//       var updateObj = {
+//         title: $createForm.elements.title.value,
+//         imageURL: $createForm.elements.photourl.value,
+//         notes: $createForm.elements.notes.value,
+//         entryId: data.editing.entryId
+//       };
+//       $liList[i].replaceWith(renderEntry(updateObj));
+//     }
+//   }
+// }
+// viewSwap('entries');
+// $image.src = 'images/placeholder-image-square.jpg';
+// $createForm.reset();
+// $delete.className = 'delete-button invisible';
+// }
+}
+
+function handleCancel(event) {
+  $modal.className = 'modal-overlay hidden';
+}
 
 function handleDelete(event) {
-
   $modal.className = 'modal-overlay';
-  viewSwap('entry-form');
-
 }
 
 function editEntry(event) {
