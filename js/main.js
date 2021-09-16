@@ -25,7 +25,6 @@ $newLink.addEventListener('click', dataView);
 $ul.addEventListener('click', editEntry);
 $delete.addEventListener('click', handleDelete);
 $cancel.addEventListener('click', handleCancel);
-$confirm.addEventListener('click', handleConfirmDOM);
 $confirm.addEventListener('click', handleConfirmData);
 
 function handleConfirmData(event) {
@@ -34,11 +33,8 @@ function handleConfirmData(event) {
       data.entries.splice(i, 1);
     }
   }
-}
-
-function handleConfirmDOM(event) {
   var $liList = document.querySelectorAll('li');
-  for (var i = 0; i < $liList.length; i++) {
+  for (i = 0; i < $liList.length; i++) {
     if (parseInt($liList[i].getAttribute('data-entry-id')) === data.editing.entryId) {
       $liList[i].remove();
       viewSwap('entries');
