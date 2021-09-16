@@ -27,6 +27,17 @@
     </div>
   </header>
   <main>
+    <div class="modal-overlay hidden">
+      <div class="modal justify-center align-center font-body">
+        <div class="row justify-center align-center">
+          <h3>Are you sure you want to delete this entry?</h3>
+        </div>
+        <div class="row justify-between margin-top">
+          <button class="cancel">CANCEL</button>
+          <button class="confirm">CONFIRM</button>
+        </div>
+      </div>
+    </div>
     <div class="view hidden" data-view="entry-form">
       <form id="create-form">
         <div class="container font-body">
@@ -57,7 +68,8 @@
             </div>
           </div>
           <div class="row">
-            <div class="column-full display-flex row-reverse">
+            <div class="column-full display-flex justify-between align-center">
+              <a id="delete-entry" class="delete-button">Delete Entry</a>
               <button class="purple-background font-body button" data-view="entry-form" type="submit">SAVE</button>
             </div>
           </div>
@@ -81,7 +93,6 @@
         </ul>
       </div>
     </div>
-
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

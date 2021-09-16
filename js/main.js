@@ -12,6 +12,10 @@ var $ul = document.querySelector('ul');
 var $titleInput = document.getElementById('title-input');
 var $notesInput = document.getElementById('notes-input');
 var $headerText = document.getElementById('header-text');
+var $delete = document.getElementById('delete-entry');
+var $modal = document.querySelector('.modal-overlay');
+var $cancel = document.querySelector('.cancel');
+var $confirm = document.querySelector('.confirm');
 
 $photoInput.addEventListener('input', handleInput);
 $createForm.addEventListener('submit', handleSubmit);
@@ -19,6 +23,33 @@ window.addEventListener('DOMContentLoaded', handleLoad);
 $entriesLink.addEventListener('click', dataView);
 $newLink.addEventListener('click', dataView);
 $ul.addEventListener('click', editEntry);
+$delete.addEventListener('click', handleDelete);
+$cancel.addEventListener('click', handleCancel);
+$confirm.addEventListener('click', handleConfirmData);
+
+function handleConfirmData(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      data.entries.splice(i, 1);
+    }
+  }
+  var $liList = document.querySelectorAll('li');
+  for (i = 0; i < $liList.length; i++) {
+    if (parseInt($liList[i].getAttribute('data-entry-id')) === data.editing.entryId) {
+      $liList[i].remove();
+      viewSwap('entries');
+      $modal.className = 'modal-overlay hidden';
+    }
+  }
+}
+
+function handleCancel(event) {
+  $modal.className = 'modal-overlay hidden';
+}
+
+function handleDelete(event) {
+  $modal.className = 'modal-overlay';
+}
 
 function editEntry(event) {
   var $dataView = event.target.getAttribute('data-view');
@@ -40,6 +71,7 @@ function editEntry(event) {
     $notesInput.value = data.editing.notes;
     $image.src = data.editing.imageURL;
   }
+  $delete.className = 'delete-button';
 }
 
 function handleLoad(event) {
@@ -89,6 +121,7 @@ function handleSubmit(event) {
   viewSwap('entries');
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
+  $delete.className = 'delete-button invisible';
 }
 
 function renderEntry(entry) {
@@ -166,4 +199,5 @@ function dataView(event) {
   data.editing = null;
   $image.src = 'images/placeholder-image-square.jpg';
   $createForm.reset();
+  $delete.className = 'delete-button invisible';
 }
